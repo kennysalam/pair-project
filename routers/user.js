@@ -1,7 +1,6 @@
 const router = require('express').Router()
 
 const User = require('../controller/user')
-const Cart = require('../controller/cart')
 
 
 router.get('/register', (req,res)=>{res.render("register")})

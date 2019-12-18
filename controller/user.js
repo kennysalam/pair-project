@@ -124,7 +124,7 @@ class User {
         .then(user =>{
             for (let objProduct of user.getDataValue("Products")) {
                 totalPrice += objProduct.price
-            }    
+            }
             res.render("checkout", {data: user, totalPrice: totalPrice})
         })
         .catch(err=>{
