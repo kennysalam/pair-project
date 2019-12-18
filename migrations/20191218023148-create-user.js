@@ -23,6 +23,12 @@ module.exports = {
       skin_type: {
         type: Sequelize.STRING
       },
+      isLogin: {
+        type: Sequelize.INTEGER
+      },
+      secret: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

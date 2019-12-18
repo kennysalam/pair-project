@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
 
   }
-  Model.init({
+  Product.init({
     name: DataTypes.STRING,
     skin_type: DataTypes.STRING,
     price: DataTypes.INTEGER,

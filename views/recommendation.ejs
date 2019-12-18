@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SKINCARE</title>
+    <style>
+        body {text-align: center;}
+        img {max-height: 100px;}
+        table {width: 100%;}
+        tr, th, td {border: 1px solid black; padding: 5px;}
+    </style>
+  </head>
+  <body>
+    <h1>Recommended Products</h1>
+    <p>
+        <a href="/user/<%= userData.id %>/">HOME</a> | <a href="/product">PRODUCT</a> | <a href="/user/logout">LOGOUT</a>
+    </p>
+
+    <h3>Recommended Products for <%= userData.name %> with <%= userData.skin_type %> skin type:</h3>
+    <form method = "POST">
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Add to cart</th>
+            </tr>
+            <% for (let objProduct of products) { %>
+                <tr>
+                    <td><img src="<%= objProduct.img_link %>"></td>
+                    <td><%= objProduct.name %></td>
+                    <td><%= objProduct.price %></td>
+                    <td><input type="checkbox" name="ProductId" value="<%= objProduct.id %>"></td>
+                </tr>
+            <% } %>
+        </table>
+        <br><br>
+        <input type = "submit" value = "Checkout"><br><br>
+    </form>
+  </body>
+</html>
