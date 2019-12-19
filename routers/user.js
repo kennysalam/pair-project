@@ -2,6 +2,9 @@ const router = require('express').Router()
 
 const User = require('../controller/user')
 
+const cekUser = require('../middlewares/cekUser')
+
+const nodemailer = require('nodemailer');
 
 router.get('/register', (req,res)=>{res.render("register")})
 router.post('/register', User.register)
@@ -11,14 +14,20 @@ router.post('/login', User.login)
 
 router.get('/logout', User.logout)
 
-router.get('/:UserId', (req,res)=>{res.render("loggedInHome", {UserId: req.params.UserId})})
+router.get('/:UserId', cekUser, (req,res)=>{res.render("loggedInHome", {data: {id: req.params.UserId}})})
 
-router.get('/:UserId/skin-type', (req,res)=>{res.render("skinTypeSelect", {UserId: req.params.UserId})})
-router.post('/:UserId/skin-type', User.addSkinType)
+router.get('/:UserId/product', cekUser, User.productLoggedIn)
 
-router.get('/:UserId/recommendation', User.getRecommendation)
-router.post('/:UserId/recommendation', User.addToCart)
+router.get('/:UserId/skin-type', cekUser, (req,res)=>{res.render("skinTypeSelect", {data: {id: req.params.UserId}})})
+router.post('/:UserId/skin-type', cekUser, User.addSkinType)
 
-router.get('/:UserId/checkout', User.checkOutView)
+router.get('/:UserId/recommendation', cekUser, User.getRecommendation)
+router.post('/:UserId/recommendation', cekUser, User.addToCart)
+
+router.get('/:UserId/checkout', cekUser, User.checkOutView)
+
+router.get('/:UserId/checkout/remove/:ProductId', cekUser, User.removeFromCart)
+
+router.get('/:UserId/finalize', cekUser, User.finalizePurchase)
 
 module.exports = router

@@ -2,12 +2,13 @@ const UserModel = require('../models').User
 const ProductModel = require('../models').Product
 const CartModel = require('../models').Cart
 
-const hashPassword = require('../helpers/hashPassword')
+const priceEdit = require('../helpers/priceEdit')
+const mailer = require('../helpers/mailer')
+const checkPassword = require('../helpers/checkPassword')
 
 class User {
     static register(req,res) {
         req.body.skin_type = null
-        req.body.isLogin = 0
         UserModel.create(req.body)
         .then(() => {
             res.redirect('/')
@@ -25,21 +26,18 @@ class User {
                 throw new Error ('Email not registered')
             }
             else {
-                let password = hashPassword(user.secret, req.body.password)
-                if(password !== user.password) {
-                    throw new Error (`Password for ${user.email} is wrong`)
-                }
-                else {
-                    userId = user.id
-                    return UserModel.update(
-                        {isLogin: 1},
-                        {where: {id: user.id}}
-                    )
-                }
+                userId = user.id
+                return checkPassword(req.body.password, user.password)
             }
         })
-        .then(()=>{
-            res.redirect(`/user/${userId}`)
+        .then(isValid =>{
+            if(!isValid) {
+                throw new Error (`Password for ${user.email} is wrong`)
+            }
+            else {
+                req.session.UserId = userId
+                res.redirect(`/user/${userId}`)
+            }    
         })
         .catch(err => {
             res.send(err.message)
@@ -47,18 +45,10 @@ class User {
     }
 
     static logout(req,res) {
-        UserModel.findOne({where: {isLogin: 1}})
-        .then(user =>{
-            return UserModel.update(
-                {isLogin: 0},
-                {where: {id: user.id}}
-            )
-        })
+        CartModel.destroy({where: {UserId: req.session.UserId}})
         .then(()=>{
+            req.session.destroy()
             res.redirect('/')
-        })
-        .catch(err=>{
-            res.send(err)
         })
     }
 
@@ -89,7 +79,7 @@ class User {
             return ProductModel.findAll({where: {skin_type: user.skin_type}})
         })
         .then(products =>{
-            res.render("recommendation", {userData: userData, products: products})
+            res.render("recommendation", {data: userData, products: products})
         })
         .catch(err=>{
             res.send(err)
@@ -118,6 +108,13 @@ class User {
         }
     }
 
+    static removeFromCart(req,res) {
+        CartModel.destroy({where: {UserId: req.params.UserId, ProductId: req.params.ProductId}})
+        .then(()=>{
+            res.redirect(`/user/${req.params.UserId}/checkout`)
+        })
+    }
+
     static checkOutView(req,res) {
         let totalPrice = 0
         UserModel.findOne({include: ProductModel, where: {id: req.params.UserId}})
@@ -125,10 +122,39 @@ class User {
             for (let objProduct of user.getDataValue("Products")) {
                 totalPrice += objProduct.price
             }
-            res.render("checkout", {data: user, totalPrice: totalPrice})
+            res.render("checkout", {data: user, totalPrice: priceEdit(totalPrice)})
         })
         .catch(err=>{
             res.send(err)
+        })
+    }
+
+    static finalizePurchase(req,res) {
+        let userData
+        let productsData
+        let totalPrice = 0
+        UserModel.findOne({include: ProductModel, where: {id: req.params.UserId}})
+        .then(user =>{
+            productsData = user.getDataValue('Products')
+            for (let objProduct of user.getDataValue("Products")) {
+                totalPrice += objProduct.price
+            }
+            userData = user
+            mailer(userData.email, productsData, totalPrice)
+            return CartModel.destroy({where: {UserId: userData.id}})
+        })
+        .then(()=>{
+            res.render("final", {data: userData})
+        })
+        .catch(err=>{
+            res.send(err)
+        })
+    }
+
+    static productLoggedIn(req,res) {
+        ProductModel.findAll()
+        .then(allProduct =>{
+            res.render("productLoggedin", {data: {id: req.params.UserId}, allProduct: allProduct})
         })
     }
 }

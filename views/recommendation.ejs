@@ -12,10 +12,10 @@
   <body>
     <h1>Recommended Products</h1>
     <p>
-        <a href="/user/<%= userData.id %>/">HOME</a> | <a href="/product">PRODUCT</a> | <a href="/user/logout">LOGOUT</a>
+        <%- include('./partial/navbarYesUser') %>
     </p>
 
-    <h3>Recommended Products for <%= userData.name %> with <%= userData.skin_type %> skin type:</h3>
+    <h3>Recommended Products for <%= data.name %> with <%= data.skin_type %> skin type:</h3>
     <form method = "POST">
         <table>
             <tr>
@@ -28,7 +28,7 @@
                 <tr>
                     <td><img src="<%= objProduct.img_link %>"></td>
                     <td><%= objProduct.name %></td>
-                    <td><%= objProduct.price %></td>
+                    <td><%= objProduct.priceEdit() %></td>
                     <td><input type="checkbox" name="ProductId" value="<%= objProduct.id %>"></td>
                 </tr>
             <% } %>

@@ -9,8 +9,8 @@
   <body>
     <h1>SKINCARE HOMEPAGE</h1>
     <p>
-        <a href="/user/<%= UserId %>/">HOME</a> | <a href="/product">PRODUCT</a> | <a href="/user/logout">LOGOUT</a>
+      <%- include('./partial/navbarYesUser') %>
     </p>
-    <h2><a href="/user/<%= UserId %>/skin-type">BEGIN</a></h2>
+    <h2><a href="/user/<%= data.id %>/skin-type">BEGIN</a></h2>
   </body>
 </html>

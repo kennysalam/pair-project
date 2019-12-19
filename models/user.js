@@ -12,14 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     address: DataTypes.STRING,
-    skin_type: DataTypes.STRING,
-    isLogin: DataTypes.INTEGER,
-    secret: DataTypes.STRING
+    skin_type: DataTypes.STRING
   }, {hooks: {
     beforeCreate: (instance, options) => {
-      instance.secret = String(Math.round(Math.random()*10000))
-      let newPassword = hashPassword(instance.secret, instance.password)
-      instance.password = newPassword
+      return hashPassword(instance.password)
+        .then(newPass =>{
+          instance.password = newPass
+          return instance
+        })
     }
   },sequelize});
   

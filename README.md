@@ -24,6 +24,7 @@ People who run this aplication need to create database and seeding data for prod
 - POST /user/:userId/skin-type
 - GET /user/:userId/recommendation (User recommended product according to User skin type and buy options)
 - POST /user/:userId/recommendation 
+- GET /user/:userId/recommendation/remove
 - GET /user/:userId/checkout (Checkout page with user & product bought details)
 - POST /
 - GET /user/:userId/finish (show that user already finished order step)

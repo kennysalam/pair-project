@@ -1,12 +1,17 @@
-const crypto = require('crypto')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-function hashPassword(newSecret, plainPassword) {
-    const secret = newSecret
-    const hash = crypto.createHmac('sha256', secret)
-    .update(plainPassword)
-    .digest('hex')
-
-    return hash
+function hashPassword(plainPassword) {
+    return new Promise ((resolve,reject)=>{
+        bcrypt.hash(plainPassword, saltRounds, function(err, hash) {
+            if(!err) {
+                resolve(hash)
+            }
+            else {
+                reject(err)
+            }
+        });
+    })
 }
 
 module.exports = hashPassword

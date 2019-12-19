@@ -12,7 +12,7 @@
   <body>
     <h1>Checkout Page</h1>
     <p>
-        <a href="/user/<%= data.id %>/">HOME</a> | <a href="/product">PRODUCT</a> | <a href="/user/logout">LOGOUT</a>
+        <%- include('./partial/navbarYesUser') %>
     </p>
 
     <h3>
@@ -20,27 +20,28 @@
         Email: <%= data.email %><br><br>
         Address: <%= data.address %><br>
     </h3>
-    <form method = "POST">
         <table>
             <tr>
                 <th>Image</th>
                 <th>Name</th>
+                <th>Action</th>
                 <th>Price</th>
             </tr>
             <% for (let objProduct of data.getDataValue("Products")) { %>
                 <tr>
                     <td><img src="<%= objProduct.img_link %>"></td>
                     <td><%= objProduct.name %></td>
-                    <td><%= objProduct.price %></td>
+                    <td><a href="/user/<%= data.id %>/checkout/remove/<%= objProduct.id %>">Remove from cart</a></td>
+                    <td><%= objProduct.priceEdit() %></td>
                 </tr>
             <% } %>
             <tr>
-                <td colspan="2">Total Price:</td>
-                <td>Rp. <%= totalPrice %></td>
+                <td colspan="3">Total Price:</td>
+                <td><%= totalPrice %></td>
             </tr>
         </table>
         <br><br>
-        <input type = "submit" value = "Checkout"><br><br>
+        <a href="/user/<%= data.id %>/finalize">Finalize Purchase</a><br><br>
     </form>
   </body>
 </html>
