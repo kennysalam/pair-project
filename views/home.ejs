@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SKINCARE</title>
-    <style>
-        body {text-align: center;}
-    </style>
-  </head>
-  <body>
-    <h1>SKINCARE HOMEPAGE</h1>
+
+<head>
+  <title>Page Title</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<style>
+  body {
+    text-align: center;
+    background-color: beige
+  }
+</style>
+
+<body>
+
+  <div class="jumbotron-fluid"
+    style="min-height: 100vh ;background-image: url(../front.gif); background-attachment: fixed; background-size: cover; background-position: bottom; position: relative; left: 0; top: 0;">
+  </div>
+  <div class="jumbotron">
+    <h1>Welcome to SKIN TYPE!</h1>
+    <p><i>"Let's be the best of you ever be"</i></p>
     <p>
-        <%- include('./partial/navbarNoUser') %>
+      <a href="/"><button type="button" class="btn btn-outline-info btn-lg">HOME</button></a>
+      <a href="/user/register"><button type="button" class="btn btn-outline-info btn-lg">REGISTER</button></a>
+      <a href="/user/login"><button type="button" class="btn btn-outline-info btn-lg">LOGIN</button></a>
+      <a href="/product"><button type="button" class="btn btn-outline-info btn-lg">PRODUCT LIST</button></a>
     </p>
-  </body>
+  </div>
+
+</body>
+
 </html>

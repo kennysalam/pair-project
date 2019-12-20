@@ -1,24 +1,33 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Login Form</title>
-    <style>
-        body {text-align: center;}
-    </style>
-  </head>
-  <body>
-    <h1>Login Form</h1>
-    <p>
-      <%- include('./partial/navbarNoUser') %>
-    </p>
-    <form method = "POST">
-        <h3>Login: <br></h3>
-        Email: <input type = "email" name = "email" placeholder="Your email" required><br><br>
-        Password: <input type = "password" name = "password" minlength="8" placeholder="Your password" id="input" required><input type="checkbox" onclick="showPassword()">Show Password<br><br>
-        <input type = "submit" value = "Login"><br><br>
-    </form>
-    <script>
+
+<head>
+  <title>Login Form</title>
+  <style>
+    body {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h1>Login Form</h1>
+      <p>
+        <%- include('./partial/navbarNoUser') %>
+      </p>
+      <form method="POST">
+        <br>
+        <h3>Login: <br></h3><br>
+        Email:<br>
+        <input type="email" name="email" placeholder="Your email" required><br><br>
+        Password: <br>
+        <input type="password" name="password" minlength="8" placeholder="Your password" id="input" required><input
+          type="checkbox" onclick="showPassword()">Show Password<br><br>
+        <input type="submit" class="btn btn-secondary" value="Login"><br><br><br><br><br>
+      </form>
+      <script>
         function showPassword() {
           var x = document.getElementById("input");
           if (x.type === "password") {
@@ -27,6 +36,10 @@
             x.type = "password";
           }
         }
-    </script>
-  </body>
+      </script>
+      <%- include('./partial/footer') %>
+    </div>
+  </div>
+</body>
+
 </html>

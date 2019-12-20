@@ -1,24 +1,36 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Skin Type Form</title>
-    <style>
-        body {text-align: center;}
-    </style>
-  </head>
-  <body>
-    <h1>Skin Type Form</h1>
-    <p>
-      <%- include('./partial/navbarYesUser') %>
-    </p>
-    <form method = "POST">
-        <h3>Select your skin type: <br></h3>
-        <input type = "radio" name = "skin_type" value="dry">Dry<br><br>
-        <input type = "radio" name = "skin_type" value="oily">Oily<br><br>
-        <input type = "radio" name = "skin_type" value="combination">Combination<br><br>
-        <input type = "radio" name = "skin_type" value="normal">Normal<br><br>
-        <input type = "submit" value = "Submit"><br><br>
-    </form>
-  </body>
+
+<head>
+  <title>Skin Type Form</title>
+  <style>
+    body {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h1>Skin Type Form</h1>
+      <p>
+        <%- include('./partial/navbarYesUser') %>
+      </p>
+      <form method="POST">
+        <h3>Select your skin type: <br></h3><br>
+        <input type="radio" aria-label="Radio button for following text input" name="skin_type" value="dry">Dry<br><br>
+        <input type="radio" aria-label="Radio button for following text input" name="skin_type"
+          value="oily">Oily<br><br>
+        <input type="radio" aria-label="Radio button for following text input" name="skin_type"
+          value="combination">Combination<br><br>
+        <input type="radio" aria-label="Radio button for following text input" name="skin_type"
+          value="normal">Normal<br><br>
+        <input type="submit" value="Submit" class="btn btn-secondary"><br><br><br><br>
+      </form>
+      <%- include('./partial/footer') %>
+    </div>
+  </div>
+</body>
+
 </html>

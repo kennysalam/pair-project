@@ -1,40 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>SKINCARE</title>
     <style>
-        body {text-align: center;}
-        img {max-height: 100px;}
-        table {width: 100%;}
-        tr, th, td {border: 1px solid black; padding: 5px;}
-    </style>
-  </head>
-  <body>
-    <h1>Recommended Products</h1>
-    <p>
-        <%- include('./partial/navbarYesUser') %>
-    </p>
+        body {
+            text-align: center;
+        }
 
-    <h3>Recommended Products for <%= data.name %> with <%= data.skin_type %> skin type:</h3>
-    <form method = "POST">
-        <table>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Add to cart</th>
-            </tr>
-            <% for (let objProduct of products) { %>
-                <tr>
-                    <td><img src="<%= objProduct.img_link %>"></td>
-                    <td><%= objProduct.name %></td>
-                    <td><%= objProduct.priceEdit() %></td>
-                    <td><input type="checkbox" name="ProductId" value="<%= objProduct.id %>"></td>
-                </tr>
-            <% } %>
-        </table>
-        <br><br>
-        <input type = "submit" value = "Checkout"><br><br>
-    </form>
-  </body>
+        img {
+            max-height: 100px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1>Recommended Products</h1>
+            <p>
+                <%- include('./partial/navbarYesUser') %>
+            </p>
+
+            <h3>Recommended Products for <%= data.name %> with <%= data.skin_type %> skin type:</h3>
+            <form method="POST">
+                <table class="table table-borderless">
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Add to cart</th>
+                    </tr>
+                    <% for (let objProduct of products) { %>
+                    <tr>
+                        <td><img src="<%= objProduct.img_link %>"></td>
+                        <td><%= objProduct.name %></td>
+                        <td><%= objProduct.priceEdit() %></td>
+                        <td><input type="checkbox" name="ProductId" value="<%= objProduct.id %>"></td>
+                    </tr>
+                    <% } %>
+                </table>
+                <br><br>
+                <input type="submit" value="Checkout" class="btn btn-secondary"><br><br>
+            </form>
+            <%- include('./partial/footer') %>
+        </div>
+    </div>
+</body>
+
 </html>

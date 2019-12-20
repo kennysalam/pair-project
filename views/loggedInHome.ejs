@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SKINCARE</title>
-    <style>
-        body {text-align: center;}
-    </style>
-  </head>
-  <body>
-    <h1>SKINCARE HOMEPAGE</h1>
-    <p>
-      <%- include('./partial/navbarYesUser') %>
-    </p>
-    <h2><a href="/user/<%= data.id %>/skin-type">BEGIN</a></h2>
-  </body>
+
+<head>
+  <title>SKINCARE</title>
+  <style>
+    body {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h1>SKINCARE HOMEPAGE</h1>
+      <p>
+        <%- include('./partial/navbarYesUser') %>
+      </p>
+      <br><br><br><br><br>
+      <h3>Let's start finding out your best skin product!</h3> <br>
+      <h2><a href="/user/<%= data.id %>/skin-type" class="btn btn-outline-primary btn-lg">BEGIN</a></h2>
+      <br><br><br><br><br><br>
+      <%- include('./partial/footer') %>
+    </div>
+  </div>
+</body>
+
 </html>

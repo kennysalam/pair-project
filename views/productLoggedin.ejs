@@ -1,34 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SKINCARE</title>
-    <style>
-        body {text-align: center;}
-        img {max-height: 100px;}
-        table {width: 100%;}
-        tr, th, td {border: 1px solid black; padding: 5px;}
-    </style>
-  </head>
-  <body>
-    <h1>PRODUCT LIST</h1>
-    <p>
-      <%- include('./partial/navbarYesUser') %>
-    </p>
-    <table>
+
+<head>
+  <title>SKINCARE</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    img {
+      max-height: 100px;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    tr,
+    th,
+    td {
+      border: 1px solid black;
+      padding: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h1>PRODUCT LIST</h1>
+      <p>
+        <%- include('./partial/navbarYesUser') %>
+      </p>
+      <table class="table table-borderless">
         <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Skin type</th>
-            <th>Price</th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Skin type</th>
+          <th>Price</th>
         </tr>
         <% for (let objProduct of allProduct) { %>
-            <tr>
-                <td><img src="<%= objProduct.img_link %>"></td>
-                <td><%= objProduct.name %></td>
-                <td><%= objProduct.skin_type %></td>
-                <td><%= objProduct.priceEdit() %></td>
-            </tr>
+        <tr>
+          <td><img src="<%= objProduct.img_link %>"></td>
+          <td><%= objProduct.name %></td>
+          <td><%= objProduct.skin_type %></td>
+          <td><%= objProduct.priceEdit() %></td>
+        </tr>
         <% } %>
-    </table>
-  </body>
+      </table>
+      <%- include('./partial/footer') %>
+    </div>
+  </div>
+</body>
+
 </html>

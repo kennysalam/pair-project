@@ -1,47 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>SKINCARE</title>
     <style>
-        body {text-align: center;}
-        img {max-height: 100px;}
-        table {width: 100%;}
-        tr, th, td {border: 1px solid black; padding: 5px;}
-    </style>
-  </head>
-  <body>
-    <h1>Checkout Page</h1>
-    <p>
-        <%- include('./partial/navbarYesUser') %>
-    </p>
+        body {
+            text-align: center;
+        }
 
-    <h3>
-        Name: <%= data.name %><br><br>
-        Email: <%= data.email %><br><br>
-        Address: <%= data.address %><br>
-    </h3>
-        <table>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Action</th>
-                <th>Price</th>
-            </tr>
-            <% for (let objProduct of data.getDataValue("Products")) { %>
+        img {
+            max-height: 100px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1>Checkout Page</h1>
+            <%- include('./partial/navbarYesUser') %>
+            <p>
+            </p>
+            <h3>
+                Dear costummer...
+            </h3>
+            <h5>
+                Here is a detail about your ordered product<br><br>
+                Name: <%= data.name %><br><br>
+                Email: <%= data.email %><br><br>
+                Address: <%= data.address %><br>
+            </h5>
+            <table class="table table-borderless">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                    <th>Price</th>
+                </tr>
+                <% for (let objProduct of data.getDataValue("Products")) { %>
                 <tr>
                     <td><img src="<%= objProduct.img_link %>"></td>
                     <td><%= objProduct.name %></td>
-                    <td><a href="/user/<%= data.id %>/checkout/remove/<%= objProduct.id %>">Remove from cart</a></td>
+                    <td><a href="/user/<%= data.id %>/checkout/remove/<%= objProduct.id %>"
+                            class="btn btn-danger">Remove from cart</a></td>
                     <td><%= objProduct.priceEdit() %></td>
                 </tr>
-            <% } %>
-            <tr>
-                <td colspan="3">Total Price:</td>
-                <td><%= totalPrice %></td>
-            </tr>
-        </table>
-        <br><br>
-        <a href="/user/<%= data.id %>/finalize">Finalize Purchase</a><br><br>
-    </form>
-  </body>
+                <% } %>
+                <tr>
+                    <td colspan="3">Total Price:</td>
+                    <td><%= totalPrice %></td>
+                </tr>
+            </table>
+            <br><br>
+            <a href="/user/<%= data.id %>/finalize" class="btn btn-secondary"
+                onclick="return confirm('Are you sure all your order is correct?')">Finalize Purchase</a><br><br>
+            </form>
+            <%- include('./partial/footer') %>
+        </div>
+    </div>
+
+</body>
+
 </html>
